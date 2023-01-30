@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: CronWorkflow
 metadata:
   name: guestbook-ui
 spec:
+  schedule: '* * * * *'
   replicas: 1
   revisionHistoryLimit: 3
   selector:
