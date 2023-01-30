@@ -3,7 +3,9 @@ kind: CronWorkflow
 metadata:
   name: guestbook-ui
 spec:
-  schedule: '* * * * *'
+  schedule: "* * * * *"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 0
   replicas: 1
   revisionHistoryLimit: 3
   selector:
