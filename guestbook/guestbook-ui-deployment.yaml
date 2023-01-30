@@ -1,23 +1,16 @@
-apiVersion: apps/v1
+apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  name: guestbook-ui
+  name: test-cron-wf
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
-  replicas: 1
-  revisionHistoryLimit: 3
-  selector:
-    matchLabels:
-      app: guestbook-ui
-  template:
-    metadata:
-      labels:
-        app: guestbook-ui
-    spec:
-      containers:
-      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
-        name: guestbook-ui
-        ports:
-        - containerPort: 80
+  workflowSpec:
+    entrypoint: whalesay
+    templates:
+   —name: whalesay
+      container:
+        image: alpine:3.6
+        command: [sh, -c]
+        args: ["date; sleep 90"]
